@@ -2,40 +2,21 @@
  * Pure helper functions extracted for testability.
  */
 
-/**
- * Parse a secret key reference from natural language.
- *   "sirr:KEYNAME"   → "KEYNAME"
- *   "KEYNAME#server" → "KEYNAME"
- *   "KEYNAME"        → "KEYNAME"
- */
-export function parseKeyRef(ref: string): string {
-  if (ref.startsWith("sirr:")) return ref.slice(5);
-  if (ref.includes("#")) return ref.split("#")[0]!;
-  return ref.trim();
+// ── Path helpers ──────────────────────────────────────────────────────────────
+
+/** Path for creating or listing secrets. */
+export function secretsPath(): string {
+  return '/secrets';
 }
 
-// ── Org-aware path helpers ────────────────────────────────────────────────────
-
-export function secretsPath(key?: string): string {
-  const org = process.env.SIRR_ORG;
-  const base = org ? `/orgs/${org}/secrets` : '/secrets';
-  return key ? `${base}/${key}` : base;
+/** Path for a specific secret by hash. */
+export function secretPath(hash?: string): string {
+  return hash ? `/secret/${hash}` : '/secret';
 }
 
-/** Always routes to the public (unauthenticated) secrets endpoint. */
-export function publicSecretsPath(id?: string): string {
-  return id ? `/secrets/${id}` : '/secrets';
-}
-
-/** Always routes to the org-scoped secrets endpoint. */
-export function orgSecretsPath(org: string, key?: string): string {
-  const base = `/orgs/${org}/secrets`;
-  return key ? `${base}/${key}` : base;
-}
-
-export function auditPath(): string {
-  const org = process.env.SIRR_ORG;
-  return org ? `/orgs/${org}/audit` : '/audit';
+/** Path for secret audit trail. */
+export function auditPath(hash: string): string {
+  return `/secret/${hash}/audit`;
 }
 
 /**
