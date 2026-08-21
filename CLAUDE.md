@@ -69,3 +69,15 @@ GitHub Actions — Node 18, 20, 22 matrix. Steps: install → lint → build →
 1. **README.md** — New tools or env vars?
 2. **CLAUDE.md** — New constraints worth recording?
 3. **llms.txt** — Reflects current tool list?
+
+## Commit Attribution
+
+**Never attribute commits to Claude, Anthropic, or any AI assistant.** This applies to every
+commit in this repo, with no exceptions:
+
+- Do **not** add `Co-Authored-By: Claude` (or any AI/assistant) trailers.
+- Do **not** add "Generated with Claude Code", robot badges, or `claude.ai/code` session links.
+- Do **not** set the commit author or committer to Claude/Anthropic — commits are authored by
+  the human maintainer only.
+
+Commit messages describe the change, nothing else. No AI attribution in any form.
